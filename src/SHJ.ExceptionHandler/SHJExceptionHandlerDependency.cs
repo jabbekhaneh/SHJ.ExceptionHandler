@@ -11,8 +11,9 @@ public static class SHJExceptionHandlerDependency
         return services;
     }
 
-    public static void UseSHJExceptionHandler(this IApplicationBuilder app)
+    public static IApplicationBuilder UseSHJExceptionHandler(this IApplicationBuilder app)
     {
         app.UseMiddleware<ExceptionMiddlewareHandler>();
+        return app;
     }
 }

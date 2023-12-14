@@ -9,7 +9,6 @@ namespace SHJ.ExceptionHandler.Middlewares;
 public class ExceptionMiddlewareHandler
 {
     private readonly RequestDelegate _request;
-
     private readonly ILogger<ExceptionMiddlewareHandler> _logger;
     public ExceptionMiddlewareHandler(RequestDelegate request,
                                       ILogger<ExceptionMiddlewareHandler> logger)
@@ -21,43 +20,63 @@ public class ExceptionMiddlewareHandler
     {
         try
         {
+            
             await _request(context);
         }
         catch (BaseException ex)
         {
             context.Response.StatusCode = ex.StatusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{ex.StatusCode}");
+            string message = $"internal error with status code:{ex.StatusCode}- exception message :{ex.Message}";
+            _logger.LogError(message, ex);
+            var response = new BaseErrorResposne(ex.StatusCode,message);
+            await context.Response.WriteAsJsonAsync($"{response}");
 
         }
         catch (WebServiceException ex)
         {
             context.Response.StatusCode = ex.StatusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{ex.StatusCode}");
+            string message = $"internal error with status code:{ex.StatusCode}- exception message :{ex.Message}";
+            var response = new BaseErrorResposne(ex.StatusCode, message);
+            _logger.LogError(message, ex);
+            await context.Response.WriteAsJsonAsync($"{response}");
 
         }
         catch (UnauthorizedAccessException ex)
         {
             var statusCode = (int)HttpStatusCode.Unauthorized;
             context.Response.StatusCode = statusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{statusCode}");
+            string message = $"internal error with status code:{statusCode}- exception message :{ex.Message}";
+            var response = new BaseErrorResposne(statusCode, message);
+            _logger.LogError(message, ex);
+            await context.Response.WriteAsJsonAsync($"{response}");
         }
         catch (KeyNotFoundException ex)
         {
             var statusCode = (int)HttpStatusCode.NotFound;
             context.Response.StatusCode = statusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{statusCode}");
+            string message = $"internal error with status code:{statusCode}- exception message :{ex.Message}";
+            var response = new BaseErrorResposne(statusCode, message);
+            _logger.LogError(message, ex);
+            await context.Response.WriteAsJsonAsync($"{response}");
         }
         catch (ValidationException ex)
         {
             var statusCode = (int)HttpStatusCode.BadRequest;
             context.Response.StatusCode = statusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{statusCode}");
+            string message = $"internal error with status code:{statusCode}- exception message :{ex.Message}";
+            var response = new BaseErrorResposne(statusCode, message);
+            _logger.LogError(message, ex);
+            await context.Response.WriteAsJsonAsync($"{response}");
         }
         catch (Exception ex)
         {
             var statusCode = (int)HttpStatusCode.InternalServerError;
             context.Response.StatusCode = statusCode;
-            await context.Response.WriteAsJsonAsync($"message :{ex.Message}- status:{statusCode}");
+            string message = $"internal error with status code:{statusCode}- exception message :{ex.Message}";
+            var response = new BaseErrorResposne(statusCode, message);
+            _logger.LogError(message, ex);
+            await context.Response.WriteAsJsonAsync($"{response}");
+
         }
     }
 

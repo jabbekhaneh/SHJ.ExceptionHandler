@@ -1,8 +1,7 @@
 SHJ.ExceptionHandler
 =======
 
-Simple SHJ.ExceptionHandler implementation in .NET
-Supports upload files,validation files,mssql server,mobgodb,get all directories(wwwroot) in asp.net
+Simple SHJ.ExceptionHandler implementation in ASP.NET
 Examples in the [wiki](https://github.com/jabbekhaneh/SHJ.ExceptionHandler).
 
 <!-- ### How do I get started? -->
