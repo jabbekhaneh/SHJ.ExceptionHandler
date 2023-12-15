@@ -12,5 +12,4 @@ public class BaseException : WebServiceException
     {
         this.StatusCode = StatusCode;
     }
-    
 }
