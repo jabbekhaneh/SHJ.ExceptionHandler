@@ -23,10 +23,10 @@ public class ExceptionMiddlewareHandler
 
             await _request(context);
         }
-        catch (BaseException ex)
+        catch (BaseBusinessException ex)
         {
-            context.Response.StatusCode = ex.StatusCode;
-            string message = $"internal error with status code:{ex.StatusCode}- exception message :{ex.Message}";
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            string message = $"internal error with ERROR code:{ex.Code}- exception message :{ex.Message}";
             _logger.LogError(message, ex);
             await context.Response.WriteAsJsonAsync($"{message} - ex: {ex}");
         }
