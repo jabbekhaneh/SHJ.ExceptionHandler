@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SHJ.ExceptionHandler.http;
 using SHJ.ExceptionHandler.Options;
-using System.Net;
 
 namespace SHJ.ExceptionHandler.Middlewares;
 
