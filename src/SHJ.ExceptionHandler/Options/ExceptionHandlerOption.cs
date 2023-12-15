@@ -2,5 +2,9 @@
 
 public class ExceptionHandlerOption
 {
-    public int ServerError { get; set; } 
+    public ExceptionHandlerOption(int serverError = 500)
+    {
+        ServerError = serverError;
+    }
+    public int ServerError { get; private set; }
 }
