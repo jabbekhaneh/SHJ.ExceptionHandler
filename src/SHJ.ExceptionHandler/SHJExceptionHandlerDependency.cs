@@ -10,13 +10,11 @@ public static class SHJExceptionHandlerDependency
     public static IServiceCollection AddSHJExceptionHandler(this IServiceCollection services,Action<ExceptionHandlerOption> option)
     {   
         services.Configure<ExceptionHandlerOption>(option);
-
         return services;
     }
 
     public static IApplicationBuilder UseSHJExceptionHandler(this IApplicationBuilder app)
     {
-        app.UseMiddleware<ExceptionMiddlewareHandler>();
-        return app;
+        return app.UseMiddleware<ExceptionMiddlewareHandler>();
     }
 }
